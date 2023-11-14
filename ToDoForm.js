@@ -1,17 +1,31 @@
-import { Button, StyleSheet, SafeAreaView, TextInput, View } from "react-native"
-import React from 'react';
-export default function ToDoForm(){
-    return(
+import { Button, StyleSheet, SafeAreaView, TextInput, View } from "react-native";
+import React, { useState } from 'react';
+
+export default function ToDoForm({ addTask }) {
+    const [taskText, setTaskText] = useState('');
+
+    const handleAddTask = () => {
+        if (taskText.trim().length > 0) {
+            addTask(taskText);
+            setTaskText(''); 
+        }
+    };
+
+    return (
         <SafeAreaView>
             <View style={styles.form}>
                 <TextInput
-                 style={styles.input}
-                 placeholder="Add a new task..."
+                    style={styles.input}
+                    placeholder="Add a new task..."
+                    onChangeText={setTaskText}
+                    value={taskText}
                 />
-                <Button title="Add" />
+                <Button title="Add" onPress={handleAddTask} />
             </View>
         </SafeAreaView>
-    )}
+    );
+}
+
 const styles = StyleSheet.create({
     form: {
         flexDirection: 'row',
