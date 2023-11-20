@@ -1,13 +1,16 @@
 import { Button, StyleSheet, SafeAreaView, TextInput, View } from "react-native";
 import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/native'; 
 
 export default function ToDoForm({ addTask }) {
     const [taskText, setTaskText] = useState('');
+    const navigation = useNavigation(); 
 
     const handleAddTask = () => {
         if (taskText.trim().length > 0) {
             addTask(taskText);
-            setTaskText(''); 
+            setTaskText('');
+            navigation.goBack(); 
         }
     };
 
